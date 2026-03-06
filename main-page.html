@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Github Issue Tracker | Home</title>
+
+    <!-- fav icon -->
+    <link
+      rel="shortcut icon"
+      href="./assets/github-logo.png"
+      type="image/x-icon"
+    />
+    <!-- daisyUI + tailwind -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      * {
+        font-family: "Geist", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-[#F8FAFC]">
+    <header class="">
+      <div class="navbar shadow-sm">
+        <div class="flex-1">
+          <a class="btn btn-ghost text-xl">
+            <img src="./assets/github-logo.png" class="h-10 w-10" alt="" />
+            GitHub Issues Tracker
+          </a>
+        </div>
+        <div class="flex gap-2">
+          <input
+            type="text"
+            placeholder="Search Issues..."
+            class="input input-bordered w-24 md:w-auto"
+          />
+          <button class="btn btn-primary">
+            <i class="fa-solid fa-magnifying-glass"></i>Search
+          </button>
+        </div>
+      </div>
+    </header>
+    <section class="w-11/12 mx-auto mt-10">
+      <!-- buttons -->
+      <div class="shadow-md flex gap-2 justify-start p-4 bg-white rounded-xl">
+        <button id="all-btn" onclick="setActive(allBtn)" class="btn py-3 px-10">
+          All
+        </button>
+        <button
+          id="open-btn"
+          onclick="setActive(openBtn)"
+          class="btn py-3 px-8"
+        >
+          Open
+        </button>
+        <button
+          id="closed-btn"
+          onclick="setActive(closedBtn)"
+          class="btn py-3 px-8"
+        >
+          Closed
+        </button>
+      </div>
+    </section>
+    <script src="./scripts/main-page.js"></script>
+  </body>
+</html>

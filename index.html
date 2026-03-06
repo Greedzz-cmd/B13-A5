@@ -21,6 +21,13 @@
       rel="stylesheet"
     />
 
+    <!-- fav icon -->
+    <link
+      rel="shortcut icon"
+      href="./assets/github-logo.png"
+      type="image/x-icon"
+    />
+
     <!-- icons -->
 
     <style>
@@ -30,21 +37,52 @@
     </style>
   </head>
   <body>
-    <main class="container mx-auto">
+    <main class="w-11/12 mx-auto">
       <!-- login page -->
-      <section class="flex justify-center">
-        <fieldset
-          class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
-        >
-          <legend class="fieldset-legend">Login</legend>
+      <section class="flex justify-center min-h-[100vh] items-center">
+        <fieldset class="fieldset rounded-box w-lg p-4 shadow-xl">
+          <!-- logo -->
+          <div class="flex justify-center">
+            <img src="./assets/github-logo.png" alt="" />
+          </div>
+          <div class="text-center">
+            <h2 class="text-2xl">GitHub Issues Tracker</h2>
+            <p class="text-[#64748B] text-base">
+              Sign in to manage your issues
+            </p>
+          </div>
+          <!-- login form -->
+          <label class="label text-black text-base">Username</label>
+          <input
+            type="text"
+            class="input w-full"
+            placeholder="Enter Username"
+            value="admin"
+          />
+          <p class="text-sm text-primary">Default: admin</p>
 
-          <label class="label">Email</label>
-          <input type="email" class="input" placeholder="Email" />
+          <label class="label text-black text-base">Password</label>
+          <input
+            type="password"
+            class="input w-full"
+            placeholder="Enter Password"
+            value="admin123"
+          />
+          <p class="text-sm text-primary">Default: admin123</p>
 
-          <label class="label">Password</label>
-          <input type="password" class="input" placeholder="Password" />
-
-          <button class="btn btn-neutral mt-4">Login</button>
+          <button class="btn btn-primary mt-4">Sign In</button>
+          <div class="flex gap-1 justify-center items-center my-6">
+            <hr class="border border-[#E4E4E7] flex-1" />
+            <span class="text-base rounded-lg">OR</span>
+            <hr class="border border-[#E4E4E7] flex-1" />
+          </div>
+          <div class="text-center">
+            <h2 class="text-sm text-[#64748B] mb-2">Demo Credentials</h2>
+            <div class="bg-base-200 py-5">
+              <h2 class="text-base">Username: admin</h2>
+              <h2 class="text-base">Password: admin123</h2>
+            </div>
+          </div>
         </fieldset>
       </section>
     </main>
