@@ -12,4 +12,4 @@ const setActive = (id) => {
   }
 };
 
-setActive();
+setActive(allBtn);
