@@ -83,37 +83,44 @@
           Closed
         </button>
       </div>
-      <!-- issues -->
-      <div
-        class="my-10 shadow-md rounded-xl bg-white p-6 flex justify-between items-center"
-      >
-        <!-- issues count -->
-        <div class="flex gap-2">
-          <!-- issues image -->
-          <div>
-            <img
-              src="./assets/Aperture.png"
-              alt=""
-              class="bg-purple-100 rounded-full p-2"
-            />
+      <div class="bg-[#FBFBFB] shadow-md rounded-xl">
+        <!-- issues -->
+        <div
+          class="my-10 shadow-md rounded-t-xl bg-white p-6 flex justify-between items-center"
+        >
+          <!-- issues count -->
+          <div class="flex gap-2">
+            <!-- issues image -->
+            <div>
+              <img
+                src="./assets/Aperture.png"
+                alt=""
+                class="bg-purple-100 rounded-full p-2"
+              />
+            </div>
+            <!-- issues content -->
+            <div>
+              <h2 class="text-xl"><span id="issue-count">50</span> Issues</h2>
+              <p class="text-[#64748B]">Track and manage your project issues</p>
+            </div>
           </div>
-          <!-- issues content -->
-          <div>
-            <h2 class="text-xl"><span id="issue-count">50</span> Issues</h2>
-            <p class="text-[#64748B]">Track and manage your project issues</p>
+          <!-- circle container -->
+          <div class="flex gap-4">
+            <div class="flex gap-2 items-center">
+              <span class="bg-purple-500 p-2 rounded-full h-4 w-4"></span>
+              <p>Open</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="bg-green-500 p-2 rounded-full h-4 w-4"></span>
+              <p>Closed</p>
+            </div>
           </div>
         </div>
-        <!-- circle container -->
-        <div class="flex gap-4">
-          <div class="flex gap-2 items-center">
-            <span class="bg-purple-500 p-2 rounded-full h-4 w-4"></span>
-            <p>Open</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="bg-green-500 p-2 rounded-full h-4 w-4"></span>
-            <p>Closed</p>
-          </div>
-        </div>
+        <!-- card container -->
+        <div
+          id="issues-card-container"
+          class="grid grid-cols-4 gap-4 p-6"
+        ></div>
       </div>
     </section>
     <script src="./scripts/main-page.js"></script>
