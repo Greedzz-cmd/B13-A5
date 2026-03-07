@@ -100,7 +100,7 @@
             </div>
             <!-- issues content -->
             <div>
-              <h2 class="text-xl"><span id="issue-count">50</span> Issues</h2>
+              <h2 class="text-xl"><span id="issue-count">0</span> Issues</h2>
               <p class="text-[#64748B]">Track and manage your project issues</p>
             </div>
           </div>
@@ -118,8 +118,16 @@
         </div>
         <!-- card container -->
         <div
-          id="issues-card-container"
-          class="grid grid-cols-4 gap-4 p-6"
+          id="all-issues-card-container"
+          class="hidden grid grid-cols-4 gap-4 p-6"
+        ></div>
+        <div
+          id="open-issues-card-container"
+          class="hidden grid grid-cols-4 gap-4 p-6"
+        ></div>
+        <div
+          id="closed-issues-card-container"
+          class="hidden grid grid-cols-4 gap-4 p-6"
         ></div>
       </div>
     </section>
