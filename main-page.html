@@ -52,11 +52,12 @@
         </div>
         <div class="flex gap-2">
           <input
+            id="search-input"
             type="text"
             placeholder="Search Issues..."
             class="input input-bordered w-24 md:w-auto"
           />
-          <button class="btn btn-primary">
+          <button id="search-btn" class="btn btn-primary">
             <i class="fa-solid fa-magnifying-glass"></i>Search
           </button>
         </div>
@@ -65,23 +66,9 @@
     <section class="w-11/12 mx-auto mt-10">
       <!-- buttons -->
       <div class="shadow-md flex gap-2 justify-start p-6 bg-white rounded-xl">
-        <button id="all-btn" onclick="setActive(allBtn)" class="btn py-3 px-10">
-          All
-        </button>
-        <button
-          id="open-btn"
-          onclick="setActive(openBtn)"
-          class="btn py-3 px-8"
-        >
-          Open
-        </button>
-        <button
-          id="closed-btn"
-          onclick="setActive(closedBtn)"
-          class="btn py-3 px-8"
-        >
-          Closed
-        </button>
+        <button id="all-btn" class="btn py-3 px-10">All</button>
+        <button id="open-btn" class="btn py-3 px-8">Open</button>
+        <button id="closed-btn" class="btn py-3 px-8">Closed</button>
       </div>
       <div class="bg-[#FBFBFB] shadow-md rounded-xl">
         <!-- issues -->
@@ -107,11 +94,11 @@
           <!-- circle container -->
           <div class="flex gap-4">
             <div class="flex gap-2 items-center">
-              <span class="bg-purple-500 p-2 rounded-full h-4 w-4"></span>
+              <span class="bg-green-500 p-2 rounded-full h-4 w-4"></span>
               <p>Open</p>
             </div>
             <div class="flex items-center gap-2">
-              <span class="bg-green-500 p-2 rounded-full h-4 w-4"></span>
+              <span class="bg-purple-500 p-2 rounded-full h-4 w-4"></span>
               <p>Closed</p>
             </div>
           </div>
@@ -119,15 +106,19 @@
         <!-- card container -->
         <div
           id="all-issues-card-container"
-          class="hidden grid grid-cols-4 gap-4 p-6"
+          class="grid grid-cols-4 gap-4 p-6"
         ></div>
         <div
           id="open-issues-card-container"
-          class="hidden grid grid-cols-4 gap-4 p-6"
+          class="hidden grid-cols-4 gap-4 p-6"
         ></div>
         <div
           id="closed-issues-card-container"
-          class="hidden grid grid-cols-4 gap-4 p-6"
+          class="hidden grid-cols-4 gap-4 p-6"
+        ></div>
+        <div
+          id="search-issues-card-container"
+          class="hidden grid-cols-4 gap-4 p-6"
         ></div>
       </div>
     </section>

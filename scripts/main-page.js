@@ -11,7 +11,14 @@ const closedIssuesCardContainer = document.getElementById(
   "closed-issues-card-container",
 );
 const issueCount = document.getElementById("issue-count");
+const searchInput = document.getElementById("search-input");
+const searchBtn = document.getElementById("search-btn");
+const searchIssuesCardContainer = document.getElementById(
+  "search-issues-card-container",
+);
 const allUrl = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
+const searchUrl =
+  "https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q={searchText}";
 
 const setActive = (activeBtn, activeContainer) => {
   btns = [allBtn, openBtn, closedBtn];
@@ -43,21 +50,6 @@ const loadAllIssues = async () => {
   const data = await res.json();
   displayAllIssues(data.data);
 };
-
-// {
-//     "id": 9,
-//     "title": "Add export to PDF feature",
-//     "description": "Users want to export reports and dashboards to PDF format for sharing and printing.",
-//     "status": "open",
-//     "labels": [
-//         "enhancement"
-//     ],
-//     "priority": "medium",
-//     "author": "feature_fred",
-//     "assignee": "",
-//     "createdAt": "2024-01-16T10:15:00Z",
-//     "updatedAt": "2024-01-16T10:15:00Z"
-// }
 
 const addLabels = (arr) => {
   const htmlElements = arr.map((el) => {
@@ -91,10 +83,7 @@ const addLabels = (arr) => {
 };
 
 const displayAllIssues = (id) => {
-  let total = 0;
   id.forEach((el) => {
-    total += 1;
-
     const card = document.createElement("div");
 
     card.className = `shadow-md border-t-5 ${el.status === "open" ? "border-green-500" : "border-purple-500"} text-xs rounded-lg space-y-3 p-3`;
@@ -134,7 +123,7 @@ const displayAllIssues = (id) => {
       </div>
     `;
     allIssuesCardContainer.appendChild(card);
-    issueCount.innerText = total;
+    issueCount.innerText = allIssuesCardContainer.children.length;
   });
 };
 
@@ -145,10 +134,9 @@ const loadOpenIssues = async () => {
 };
 
 const displayOpenIssues = (id) => {
-  let total = 0;
+  openIssuesCardContainer.innerHTML = "";
   id.forEach((el) => {
     if (el.status === "closed") return;
-    total += 1;
 
     const card = document.createElement("div");
 
@@ -189,7 +177,7 @@ const displayOpenIssues = (id) => {
       </div>
     `;
     openIssuesCardContainer.appendChild(card);
-    issueCount.innerText = total;
+    issueCount.innerText = openIssuesCardContainer.children.length;
   });
 };
 
@@ -200,10 +188,9 @@ const loadClosedIssues = async () => {
 };
 
 const displayClosedIssues = (id) => {
-  let total = 0;
+  closedIssuesCardContainer.innerHTML = "";
   id.forEach((el) => {
     if (el.status === "open") return;
-    total += 1;
 
     const card = document.createElement("div");
 
@@ -244,23 +231,93 @@ const displayClosedIssues = (id) => {
       </div>
     `;
     closedIssuesCardContainer.appendChild(card);
-    issueCount.innerText = total;
+    issueCount.innerText = closedIssuesCardContainer.children.length;
   });
 };
 
 allBtn.addEventListener("click", () => {
   setActive(allBtn, allIssuesCardContainer);
+  searchIssuesCardContainer.classList.add("hidden");
+  searchIssuesCardContainer.classList.remove("grid");
+  issueCount.innerText = allIssuesCardContainer.children.length;
 });
 
 openBtn.addEventListener("click", () => {
   setActive(openBtn, openIssuesCardContainer);
+  searchIssuesCardContainer.classList.add("hidden");
+  searchIssuesCardContainer.classList.remove("grid");
+  loadOpenIssues();
 });
 
 closedBtn.addEventListener("click", () => {
   setActive(closedBtn, closedIssuesCardContainer);
+  searchIssuesCardContainer.classList.add("hidden");
+  searchIssuesCardContainer.classList.remove("grid");
+  loadClosedIssues();
 });
 
-loadClosedIssues();
+const searchIssues = async (value) => {
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${value}`,
+  );
+  const data = await res.json();
+  displaySearch(data.data);
+};
+
+const displaySearch = (value) => {
+  searchIssuesCardContainer.innerHTML = "";
+  value.forEach((el) => {
+    const card = document.createElement("div");
+
+    card.className = `shadow-md border-t-5 ${el.status === "open" ? "border-green-500" : "border-purple-500"} text-xs rounded-lg space-y-3 p-3`;
+
+    card.innerHTML = `
+    <div onclick="">
+        <div class="flex justify-between my-3">
+          <div>
+            ${
+              el.status === "open"
+                ? `<span class="bg-green-100 text-green-600 p-1 rounded-full">
+              <i class="fa-regular fa-circle"></i>
+            </span>`
+                : `<span class="bg-purple-100 text-purple-600 p-1 rounded-full">
+              <i class="fa-regular fa-circle-check"></i>
+            </span>`
+            }
+            
+          </div>
+          <span class="${el.priority === "high" ? "bg-red-100 text-red-600" : el.priority === "medium" ? "bg-yellow-100 text-yellow-600" : "bg-slate-200 text-slate-600"} py-1 px-4 rounded-2xl">
+            ${el.priority}
+          </span>
+        </div>
+        <h2 class="text-base">${el.title}</h2>
+        <p class="text-[#64748B] my-2">
+          ${el.description}
+        </p>
+        <div class="flex gap-2">
+          
+          ${addLabels(el.labels)}
+        </div>
+      </div>
+      <hr class="border border-slate-300" />
+      <div class="space-y-2 p-2">
+        <p class="text-[#64748B]">#1by john_doe</p>
+        <p class="text-[#64748B]">1/15/2024</p>
+      </div>
+    `;
+    searchIssuesCardContainer.appendChild(card);
+    issueCount.innerText = searchIssuesCardContainer.children.length;
+  });
+};
+
+searchBtn.addEventListener("click", () => {
+  const searchInputValue = searchInput.value;
+  const filteredSearchValue = searchInputValue.trim().toLowerCase();
+  searchIssues(filteredSearchValue);
+  searchIssuesCardContainer.classList.remove("hidden");
+  searchIssuesCardContainer.classList.add("grid");
+  setActive();
+});
+
 loadAllIssues();
-loadOpenIssues();
 setActive(allBtn, allIssuesCardContainer);
