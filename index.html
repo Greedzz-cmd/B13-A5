@@ -29,6 +29,13 @@
     />
 
     <!-- icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
     <style>
       * {
@@ -54,23 +61,23 @@
           <!-- login form -->
           <label class="label text-black text-base">Username</label>
           <input
+            id="username-input"
             type="text"
             class="input w-full"
             placeholder="Enter Username"
-            value="admin"
           />
           <p class="text-sm text-primary">Default: admin</p>
 
           <label class="label text-black text-base">Password</label>
           <input
+            id="password-input"
             type="password"
             class="input w-full"
             placeholder="Enter Password"
-            value="admin123"
           />
           <p class="text-sm text-primary">Default: admin123</p>
 
-          <button class="btn btn-primary mt-4">Sign In</button>
+          <button id="sign-in-btn" class="btn btn-primary mt-4">Sign In</button>
           <div class="flex gap-1 justify-center items-center my-6">
             <hr class="border border-[#E4E4E7] flex-1" />
             <span class="text-base rounded-lg">OR</span>
@@ -79,12 +86,23 @@
           <div class="text-center">
             <h2 class="text-sm text-[#64748B] mb-2">Demo Credentials</h2>
             <div class="bg-base-200 py-5">
-              <h2 class="text-base">Username: admin</h2>
-              <h2 class="text-base">Password: admin123</h2>
+              <div class="flex gap-2 justify-center items-center">
+                <h2 class="text-base">Username: admin</h2>
+                <span id="copy-username" class="cursor-pointer"
+                  ><i class="fa-solid fa-copy"></i
+                ></span>
+              </div>
+              <div class="flex gap-2 justify-center items-center">
+                <h2 class="text-base">Password: admin123</h2>
+                <span id="copy-password" class="cursor-pointer"
+                  ><i class="fa-solid fa-copy"></i
+                ></span>
+              </div>
             </div>
           </div>
         </fieldset>
       </section>
     </main>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
