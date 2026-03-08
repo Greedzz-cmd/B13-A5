@@ -13,13 +13,15 @@ copyPassword.addEventListener("click", () => {
 });
 
 const manageSignIn = () => {
-  usernameInput.value = "";
-  passwordInput.value = "";
   const username = usernameInput.value;
   const password = passwordInput.value;
-  if (username == "admin" && password == "admin123") {
+  if (username === "admin" && password === "admin123") {
+    usernameInput.value = "";
+    passwordInput.value = "";
     window.location.href = "./main-page.html";
   } else {
+    usernameInput.value = "";
+    passwordInput.value = "";
     alert("Incorrect Username or Password");
     return;
   }
