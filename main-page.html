@@ -42,33 +42,39 @@
     </style>
   </head>
   <body class="bg-[#F8FAFC]">
-    <header class="">
-      <div class="navbar shadow-sm">
+    <header class="sticky top-0">
+      <div
+        class="navbar shadow-sm bg-white flex flex-col sm:flex-row gap-5 sm:gap-0"
+      >
         <div class="flex-1">
           <a href="./main-page.html" class="btn btn-ghost text-xl">
             <img src="./assets/github-logo.png" class="h-10 w-10" alt="" />
             GitHub Issues Tracker
           </a>
         </div>
-        <div class="flex gap-2">
-          <input
-            id="search-input"
-            type="text"
-            placeholder="Search Issues..."
-            class="input input-bordered w-24 md:w-auto"
-          />
-          <button id="search-btn" class="btn btn-primary">
-            <i class="fa-solid fa-magnifying-glass"></i>Search
-          </button>
-        </div>
-        <div class="ml-7">
-          <a href="./index.html" class="btn btn-primary">Sign Out</a>
+        <div class="flex justify-between sm:justify-end gap-6">
+          <div class="flex gap-2">
+            <input
+              id="search-input"
+              type="text"
+              placeholder="Search Issues..."
+              class="input input-bordered w-24 md:w-auto"
+            />
+            <button id="search-btn" class="btn btn-primary">
+              <i class="fa-solid fa-magnifying-glass"></i>Search
+            </button>
+          </div>
+          <div class="ml-7">
+            <a href="./index.html" class="btn btn-primary">Sign Out</a>
+          </div>
         </div>
       </div>
     </header>
     <section class="w-11/12 mx-auto mt-10">
       <!-- buttons -->
-      <div class="shadow-md flex gap-2 justify-start p-6 bg-white rounded-xl">
+      <div
+        class="shadow-md flex gap-2 justify-center p-6 bg-white rounded-xl flex-wrap sm:justify-start"
+      >
         <button id="all-btn" class="btn py-3 px-10">All</button>
         <button id="open-btn" class="btn py-3 px-8">Open</button>
         <button id="closed-btn" class="btn py-3 px-8">Closed</button>
@@ -76,7 +82,7 @@
       <div class="bg-[#FBFBFB] shadow-md rounded-xl">
         <!-- issues -->
         <div
-          class="my-10 shadow-md rounded-t-xl bg-white p-6 flex justify-between items-center"
+          class="my-10 shadow-md rounded-t-xl bg-white p-6 flex flex-col sm:flex-row justify-between items-center"
         >
           <!-- issues count -->
           <div class="flex gap-2">
@@ -95,7 +101,7 @@
             </div>
           </div>
           <!-- circle container -->
-          <div class="flex gap-4">
+          <div class="flex gap-4 mt-5 sm:mt-0">
             <div class="flex gap-2 items-center">
               <span class="bg-green-500 p-2 rounded-full h-4 w-4"></span>
               <p>Open</p>
@@ -107,22 +113,27 @@
           </div>
         </div>
         <!-- card container -->
-
+        <div
+          id="spinner"
+          class="justify-center items-center text-primary p-50 hidden"
+        >
+          <span class="loading loading-spinner loading-xl"></span>
+        </div>
         <div
           id="all-issues-card-container"
-          class="grid grid-cols-4 gap-4 p-6"
+          class="grid sm:grid-cols-4 gap-4 p-6"
         ></div>
         <div
           id="open-issues-card-container"
-          class="hidden grid-cols-4 gap-4 p-6"
+          class="hidden sm:grid-cols-4 gap-4 p-6"
         ></div>
         <div
           id="closed-issues-card-container"
-          class="hidden grid-cols-4 gap-4 p-6"
+          class="hidden sm:grid-cols-4 gap-4 p-6"
         ></div>
         <div
           id="search-issues-card-container"
-          class="hidden grid-cols-4 gap-4 p-6"
+          class="hidden sm:grid-cols-4 gap-4 p-6"
         ></div>
       </div>
       <!-- Open the modal using ID.showModal() method -->

@@ -12,17 +12,29 @@ copyPassword.addEventListener("click", () => {
   passwordInput.value = "admin123";
 });
 
-signInBtn.addEventListener("click", () => {
+const manageSignIn = () => {
+  usernameInput.value = "";
+  passwordInput.value = "";
   const username = usernameInput.value;
   const password = passwordInput.value;
   if (username == "admin" && password == "admin123") {
     window.location.href = "./main-page.html";
-    usernameInput.value = "";
-    passwordInput.value = "";
   } else {
-    usernameInput.value = "";
-    passwordInput.value = "";
     alert("Incorrect Username or Password");
     return;
+  }
+};
+
+signInBtn.addEventListener("click", () => manageSignIn());
+
+passwordInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    manageSignIn();
+  }
+});
+
+usernameInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    manageSignIn();
   }
 });

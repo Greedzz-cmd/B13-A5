@@ -19,6 +19,7 @@ const searchIssuesCardContainer = document.getElementById(
 const issueDetailsContainer = document.getElementById(
   "issue-details-container",
 );
+const spinner = document.getElementById("spinner");
 const myModal1 = document.getElementById("my_modal_1");
 const detailsUrl = "https://phi-lab-server.vercel.app/api/v1/lab/issue/{id}";
 const allUrl = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
@@ -50,10 +51,22 @@ const setActive = (activeBtn, activeContainer) => {
   }
 };
 
+const manageSpinner = (state) => {
+  if (state === true) {
+    spinner.classList.remove("hidden");
+    spinner.classList.add("flex");
+  } else {
+    spinner.classList.add("hidden");
+    spinner.classList.remove("flex");
+  }
+};
+
 const loadAllIssues = async () => {
+  manageSpinner(true);
   const res = await fetch(allUrl);
   const data = await res.json();
   displayAllIssues(data.data);
+  manageSpinner(false);
 };
 
 const addLabels = (arr) => {
@@ -133,9 +146,11 @@ const displayAllIssues = (id) => {
 };
 
 const loadOpenIssues = async () => {
+  manageSpinner(true);
   const res = await fetch(allUrl);
   const data = await res.json();
   displayOpenIssues(data.data);
+  manageSpinner(false);
 };
 
 const displayOpenIssues = (id) => {
@@ -187,9 +202,11 @@ const displayOpenIssues = (id) => {
 };
 
 const loadClosedIssues = async () => {
+  manageSpinner(true);
   const res = await fetch(allUrl);
   const data = await res.json();
   displayClosedIssues(data.data);
+  manageSpinner(false);
 };
 
 const displayClosedIssues = (id) => {
@@ -262,11 +279,13 @@ closedBtn.addEventListener("click", () => {
 });
 
 const searchIssues = async (value) => {
+  manageSpinner(true);
   const res = await fetch(
     `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${value}`,
   );
   const data = await res.json();
   displaySearch(data.data);
+  manageSpinner(false);
 };
 
 const displaySearch = (value) => {
@@ -356,7 +375,7 @@ const displayIssueDetails = (data) => {
       <p class="text-[#64748B]">
         ${data.description}
       </p>
-      <div class="flex gap-40 bg-slate-100 p-4 rounded-md">
+      <div class="flex justify-between bg-slate-100 p-4 rounded-md">
         <div>
           <p class="text-xs text-[#64748B]">Assignee:</p>
           <p class="font-semibold">${data.assignee === "" ? data.author : data.assignee}</p>
