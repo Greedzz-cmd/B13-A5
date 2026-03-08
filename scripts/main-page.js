@@ -322,6 +322,7 @@ searchBtn.addEventListener("click", () => {
   searchIssuesCardContainer.classList.remove("hidden");
   searchIssuesCardContainer.classList.add("grid");
   setActive();
+  searchInput.value = "";
 });
 
 const showIssueDetails = async (id) => {
