@@ -104,6 +104,7 @@
           </div>
         </div>
         <!-- card container -->
+
         <div
           id="all-issues-card-container"
           class="grid grid-cols-4 gap-4 p-6"
@@ -121,6 +122,19 @@
           class="hidden grid-cols-4 gap-4 p-6"
         ></div>
       </div>
+      <!-- Open the modal using ID.showModal() method -->
+      <dialog id="my_modal_1" class="modal">
+        <div class="modal-box">
+          <div id="issue-details-container"></div>
+
+          <div class="modal-action">
+            <form method="dialog">
+              <!-- if there is a button in form, it will close the modal -->
+              <button class="btn btn-primary">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </section>
     <script src="./scripts/main-page.js"></script>
   </body>

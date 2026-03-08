@@ -16,6 +16,11 @@ const searchBtn = document.getElementById("search-btn");
 const searchIssuesCardContainer = document.getElementById(
   "search-issues-card-container",
 );
+const issueDetailsContainer = document.getElementById(
+  "issue-details-container",
+);
+const myModal1 = document.getElementById("my_modal_1");
+const detailsUrl = "https://phi-lab-server.vercel.app/api/v1/lab/issue/{id}";
 const allUrl = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 const searchUrl =
   "https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q={searchText}";
@@ -89,7 +94,7 @@ const displayAllIssues = (id) => {
     card.className = `shadow-md border-t-5 ${el.status === "open" ? "border-green-500" : "border-purple-500"} text-xs rounded-lg space-y-3 p-3`;
 
     card.innerHTML = `
-    <div onclick="">
+    <div class="cursor-pointer" onclick="showIssueDetails(${el.id})">
         <div class="flex justify-between my-3">
           <div>
             ${
@@ -117,9 +122,9 @@ const displayAllIssues = (id) => {
         </div>
       </div>
       <hr class="border border-slate-300" />
-      <div class="space-y-2 p-2">
-        <p class="text-[#64748B]">#1by john_doe</p>
-        <p class="text-[#64748B]">1/15/2024</p>
+      <div class="space-y-2 p-2 cursor-pointer" onclick="showIssueDetails(${el.id})">
+        <p class="text-[#64748B]">${el.assignee === "" ? el.author : el.assignee}</p>
+        <p class="text-[#64748B]">${el.status === "open" ? el.createdAt : el.updatedAt}</p>
       </div>
     `;
     allIssuesCardContainer.appendChild(card);
@@ -143,7 +148,7 @@ const displayOpenIssues = (id) => {
     card.className = `shadow-md border-t-5 ${el.status === "open" ? "border-green-500" : "border-purple-500"} text-xs rounded-lg space-y-3 p-3`;
 
     card.innerHTML = `
-    <div onclick="">
+    <div class="cursor-pointer"onclick="showIssueDetails(${el.id})">
         <div class="flex justify-between my-3">
           <div>
             ${
@@ -171,9 +176,9 @@ const displayOpenIssues = (id) => {
         </div>
       </div>
       <hr class="border border-slate-300" />
-      <div class="space-y-2 p-2">
-        <p class="text-[#64748B]">#1by john_doe</p>
-        <p class="text-[#64748B]">1/15/2024</p>
+      <div class="space-y-2 p-2 cursor-pointer" onclick="showIssueDetails(${el.id})">
+        <p class="text-[#64748B]">${el.assignee === "" ? el.author : el.assignee}</p>
+        <p class="text-[#64748B]">${el.status === "open" ? el.createdAt : el.updatedAt}</p>
       </div>
     `;
     openIssuesCardContainer.appendChild(card);
@@ -197,7 +202,7 @@ const displayClosedIssues = (id) => {
     card.className = `shadow-md border-t-5 ${el.status === "open" ? "border-green-500" : "border-purple-500"} text-xs rounded-lg space-y-3 p-3`;
 
     card.innerHTML = `
-    <div onclick="">
+    <div class="cursor-pointer" onclick="showIssueDetails(${el.id})">
         <div class="flex justify-between my-3">
           <div>
             ${
@@ -225,9 +230,9 @@ const displayClosedIssues = (id) => {
         </div>
       </div>
       <hr class="border border-slate-300" />
-      <div class="space-y-2 p-2">
-        <p class="text-[#64748B]">#1by john_doe</p>
-        <p class="text-[#64748B]">1/15/2024</p>
+      <div class="space-y-2 p-2 cursor-pointer" onclick="showIssueDetails(${el.id})">
+        <p class="text-[#64748B]">${el.assignee === "" ? el.author : el.assignee}</p>
+        <p class="text-[#64748B]">${el.status === "open" ? el.createdAt : el.updatedAt}</p>
       </div>
     `;
     closedIssuesCardContainer.appendChild(card);
@@ -272,7 +277,7 @@ const displaySearch = (value) => {
     card.className = `shadow-md border-t-5 ${el.status === "open" ? "border-green-500" : "border-purple-500"} text-xs rounded-lg space-y-3 p-3`;
 
     card.innerHTML = `
-    <div onclick="">
+    <div class="cursor-pointer" onclick="showIssueDetails(${el.id})">
         <div class="flex justify-between my-3">
           <div>
             ${
@@ -300,9 +305,9 @@ const displaySearch = (value) => {
         </div>
       </div>
       <hr class="border border-slate-300" />
-      <div class="space-y-2 p-2">
-        <p class="text-[#64748B]">#1by john_doe</p>
-        <p class="text-[#64748B]">1/15/2024</p>
+      <div class="space-y-2 p-2 cursor-pointer" onclick="showIssueDetails(${el.id})">
+        <p class="text-[#64748B]">${el.assignee === "" ? el.author : el.assignee}</p>
+        <p class="text-[#64748B]">${el.status === "open" ? el.createdAt : el.updatedAt}</p>
       </div>
     `;
     searchIssuesCardContainer.appendChild(card);
@@ -318,6 +323,52 @@ searchBtn.addEventListener("click", () => {
   searchIssuesCardContainer.classList.add("grid");
   setActive();
 });
+
+const showIssueDetails = async (id) => {
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`,
+  );
+  const data = await res.json();
+  displayIssueDetails(data.data);
+};
+
+const displayIssueDetails = (data) => {
+  issueDetailsContainer.innerHTML = "";
+  const card = document.createElement("div");
+  card.className = "space-y-3";
+  card.innerHTML = `
+    <h2 class="font-bold text-2xl">${data.title}</h2>
+      <div class="flex gap-5">
+        <div>
+          <span class="bg-${data.status === "open" ? "green" : "purple"}-600 text-white rounded-2xl p-1 text-xs">
+            ${data.status}
+          </span>
+        </div>
+        <ul class="flex gap-5 text-[#64748B] text-xs items-center list-disc">
+          <li>Opened By ${data.assignee === "" ? data.author : data.assignee}</li>
+          <li>${data.status === "open" ? data.createdAt : data.updatedAt}</li>
+        </ul>
+      </div>
+      <div class="flex gap-2">
+        ${addLabels(data.labels)}
+      </div>
+      <p class="text-[#64748B]">
+        ${data.description}
+      </p>
+      <div class="flex gap-40 bg-slate-100 p-4 rounded-md">
+        <div>
+          <p class="text-xs text-[#64748B]">Assignee:</p>
+          <p class="font-semibold">${data.assignee === "" ? data.author : data.assignee}</p>
+        </div>
+        <div>
+          <p class="text-xs text-[#64748B] ml-2.5">Priority:</p>
+          <p class="py-1 px-4 rounded-2xl bg-red-100 text-red-600">${data.priority}</p>
+        </div>
+      </div>
+    `;
+  issueDetailsContainer.appendChild(card);
+  myModal1.showModal();
+};
 
 loadAllIssues();
 setActive(allBtn, allIssuesCardContainer);
